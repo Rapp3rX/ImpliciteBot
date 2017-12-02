@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-const PREFIX = "=";
+const PREFIX = "pls ";
 
 var client = new Discord.Client();
 
@@ -27,13 +27,29 @@ client.on('guildMemberAdd', member => {
     // Send the message, mentioning the member
     channel.send(`${member} elhagyta a szervert!`);
   });
-
-client.on("message", function(message) {
+client.on("message", async message => {
     var sender = message.author;
-    var msg = message.content.toUpperCase();
+    var msg = message.content.toLowerCase();
     if (sender.id == '386597563379351563'){
       return;
+    }    
+    if (message.author.equals(client.user)) return;
+    
+    if (msg.includes('implicitebot')){
+        message.channel.send(`Igen, én vagyok! Esetleg szeretnél tőlem valamit ${sender}?`);      
     }
+    if (msg.includes('tgf') || msg.includes('tagfelvétel')){
+        message.channel.send(`${sender}, jelenleg nincs tagfelvétel! Ha lesz, azt kihírdetjük a Facebook oldalunkon, vagy a szerveren!`);      
+    }
+    if (msg.includes('csá') || msg.includes('szia') || msg.includes('cső') || msg.includes('szevasz')){
+        message.channel.send(`Szia, ${sender}!`);      
+    }
+    if (msg.includes('anyád') || msg.includes('geci') || msg.includes('büdös') || msg.includes('kurva') || msg.includes('meleg') || msg.includes('fasz') || msg.includes('köcsög') || msg.includes('buzi') || msg.includes('fuck') || msg.includes('homár') ){
+        message.delete();
+        message.channel.send(`Töröltem ${sender} üzenetét! Indok: Káromkodás`);      
+    }
+});
+client.on("message", function(message) {
     if (message.author.equals(client.user)) return;
 
     if (!message.content.startsWith(PREFIX)) return;
@@ -41,21 +57,18 @@ client.on("message", function(message) {
     var args = message.content.substring(PREFIX.length).split(" ");
 
     switch (args[0].toLowerCase()){
-        case "ping":
-            message.channel.send("Pong!");
+        case "készítőd":
+            message.channel.send("Engem Rapp3rX készített!");
             break;
-        case "help":
-            message.channel.send("Szia! Elérhető parancsok:\n- =help\n- =ping");
+        case "szerver":
+            message.channel.send("Legjobb szerver! (Legalább is belém írták :P)");
             break;
+        case "parancsok":
+           message.channel.send("Elérhető parancsok tőlem: készítőd, szerver, parancsok");
+           break;
         default:
-            message.channel.send("Ez a parancs nem létezik!");
+            message.channel.send("Nem tudod mit akarsz? Akkor kérdezd meg tőlem a parancsokat!");
                         
-    }
-    if (msg.includes('tgf')){
-        message.channel.send("Jelenleg nincs tagfelvétel! Ha lesz, azt kihírdetjük a Facebook oldalunkon, vagy a szerveren!");
-    }
-    if (msg.includes('tagfelvétel')){
-        message.channel.send("Jelenleg nincs tagfelvétel! Ha lesz, azt kihírdetjük a Facebook oldalunkon, vagy a szerveren!");
     }
   
 });
