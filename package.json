@@ -1,0 +1,11 @@
+{
+  "name": "implicitebot",
+  "version": "1.0.0",
+  "description": "ImpiciteBot",
+  "main": "index.js",
+  "author": "Rapp3rX",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.2.1"
+  }
+}
