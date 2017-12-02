@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-const PREFIX = "?";
+const PREFIX = "=";
 
 var client = new Discord.Client();
 
@@ -29,6 +29,11 @@ client.on('guildMemberAdd', member => {
   });
 
 client.on("message", function(message) {
+    var sender = message.author;
+    var msg = message.content.toUpperCase();
+    if (sender.id == '386597563379351563'){
+      return;
+    }
     if (message.author.equals(client.user)) return;
 
     if (!message.content.startsWith(PREFIX)) return;
@@ -40,12 +45,19 @@ client.on("message", function(message) {
             message.channel.send("Pong!");
             break;
         case "help":
-            message.channel.send("Szia! Elérhető parancsok:\n- ?help\n- ?ping");
+            message.channel.send("Szia! Elérhető parancsok:\n- =help\n- =ping");
             break;
         default:
             message.channel.send("Ez a parancs nem létezik!");
                         
     }
+    if (msg.includes('tgf'){
+        message.channel.send("Jelenleg nincs tagfelvétel! Ha lesz, azt kihírdetjük a Facebook oldalunkon, vagy a szerveren!");
+    }
+    if (msg.includes('tagfelvétel'){
+        message.channel.send("Jelenleg nincs tagfelvétel! Ha lesz, azt kihírdetjük a Facebook oldalunkon, vagy a szerveren!");
+    }    
+  
 });
 
 client.login(process.env.BOT_TOKEN);       
