@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-const PREFIX = "#";
+const PREFIX = "?";
 
 var client = new Discord.Client();
 
@@ -40,7 +40,7 @@ client.on("message", function(message) {
             message.channel.send("Pong!");
             break;
         case "help":
-            message.channel.send("Szia! Elérhető parancsok:\n- #help\n- #ping");
+            message.channel.send("Szia! Elérhető parancsok:\n- ?help\n- ?ping");
             break;
         default:
             message.channel.send("Ez a parancs nem létezik!");
