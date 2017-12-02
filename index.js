@@ -50,12 +50,6 @@ client.on("message", function(message) {
         default:
             message.channel.send("Ez a parancs nem létezik!");
                         
-    }
-    if (msg.includes('tgf'){
-        message.channel.send("Jelenleg nincs tagfelvétel! Ha lesz, azt kihírdetjük a Facebook oldalunkon, vagy a szerveren!");
-    }
-    if (msg.includes('tagfelvétel'){
-        message.channel.send("Jelenleg nincs tagfelvétel! Ha lesz, azt kihírdetjük a Facebook oldalunkon, vagy a szerveren!");
     }    
   
 });
