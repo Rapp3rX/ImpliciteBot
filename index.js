@@ -79,7 +79,7 @@ client.on("message", message => {
         message.channel.send(`${sender}, jelenleg nincs tagfelvétel! Ha lesz, azt kihírdetjük a Facebook oldalunkon, vagy a szerveren!`);      
     }
     else if (msg.includes('implicitebot')){
-        message.channel.send(`Igen, én vagyok! Esetleg szeretnél tőlem valamit ${sender}? Mert akkor: pls parancsok`);      
+        message.channel.send(`Igen, én vagyok! Esetleg szeretnél tőlem valamit ${sender}? Mert akkor: imp parancsok`);      
     }
 
 
