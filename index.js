@@ -1,9 +1,21 @@
 const Discord = require("discord.js");
-
-const PREFIX = "imp ";
 const YTDL = require("ytdl-core");
 
+const PREFIX = "imp ";
+
 var client = new Discord.Client();
+var servers = {};
+
+function play(connection, message) {
+    var server = servers[message.guild.id];
+    server.dispatcher = connection.playStream(YTDL(server.queue[0], {filter: "audioonly"}));
+    server.queue.shitf();
+    server.dispatcher.on("end", function(){
+        if (server.queue[0]) play(connection, message);
+        else connection.disconnect();
+    });
+}
+
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -19,8 +31,9 @@ client.on('guildMemberAdd', member => {
 client.on("message", message => {
     let msg = message.content.toLowerCase();
     let sender = message.author;
-    let cont = message.content.slice(PREFIX.length).split(" ");
-    let args = cont.slice(1); 
+    //let cont = message.content.slice(PREFIX.length).split(" ");
+    //let args = cont.slice(1);
+    var args = message.content.substring(PREFIX.length).split(" ");
 
     if (message.author.equals(client.user)) return;
     
@@ -50,7 +63,7 @@ client.on("message", message => {
         purge(); 
 
     }
-  if (msg.startsWith(PREFIX + 'play')) {
+    if (msg.startsWith(PREFIX + 'play')) {
         if (!args[0]){
             message.channel.send(`${sender}, kérlek adj meg egy linket!`);
             return;
@@ -71,6 +84,10 @@ client.on("message", message => {
             //play(connection, message);
         });
     }
+    /*if (msg.startsWith(PREFIX + 'skip')){
+        var server = servers[message.guild.id];
+        if (server.dispatcher) server.dispatcher.end();
+    }*/
     if (msg.startsWith(PREFIX + 'stop')){
         var server = servers[message.guild.id]; 
         if (message.guild.voiceConnection)
@@ -92,6 +109,7 @@ client.on("message", message => {
     if (msg.startsWith(PREFIX + 'szerver')){
         message.channel.send("Hamarosan...");
     }
+    if (msg.startsWith(PREFIX + 'info'))
     if (msg.startsWith(PREFIX + 'parancsok')){
         message.channel.send("Üdvözöllek!\nPrefix: "+ PREFIX + "\nElérhető parancsok tőlem:\n- készítőd(Ki készített)\n- szerver(A szerverről)\n- parancsok(Parancs lista)");
     }
@@ -100,7 +118,7 @@ client.on("message", message => {
         message.delete();
         message.channel.send(`Töröltem ${sender} üzenetét! Indok: Káromkodás`);      
     }
-    else if (msg.includes("http://") || msg.includes("https://") ){
+    /*else if (msg.includes("http://") || msg.includes("https://") ){
         if (message.channel.id == '386610409563619328'){
             console.log('Itt hírdettek, de nem tötént semmi.')
         } else {
@@ -108,7 +126,7 @@ client.on("message", message => {
             message.channel.send(`Töröltem ${sender} üzenetét! Indok: Link`); 
         }
 
-    }
+    }*/
     else if (msg.includes('csá') || msg.includes('szia') || msg.includes('cső') || msg.includes('szevasz')){
         message.channel.send(`Szia, ${sender}!`);      
     }
@@ -116,7 +134,7 @@ client.on("message", message => {
         message.channel.send(`${sender}, jelenleg nincs tagfelvétel! Ha lesz, azt kihírdetjük a Facebook oldalunkon, vagy a szerveren!`);      
     }
     else if (msg.includes('implicitebot')){
-        message.channel.send(`Igen, én vagyok! Esetleg szeretnél tőlem valamit ${sender}? Mert akkor: imp parancsok`);      
+        message.channel.send(`Igen, én vagyok! Esetleg szeretnél tőlem valamit ${sender}? Mert akkor: pls parancsok`);      
     }
 
 
