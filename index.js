@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 
 const PREFIX = "imp ";
+const YTDL = require("ytdl-core");
 
 var client = new Discord.Client();
 
@@ -47,6 +48,42 @@ client.on("message", message => {
         }
 
         purge(); 
+
+    }
+  if (msg.startsWith(PREFIX + 'play')) {
+        if (!args[0]){
+            message.channel.send(`${sender}, kérlek adj meg egy linket!`);
+            return;
+        }
+        if (!message.member.voiceChannel){
+            message.channel.send(`Nem egy szobában vagy!`);
+        }
+        if (!servers[message.guild.id]) servers[message.guild.id] = {
+            queue: []
+        };
+
+        var server = servers[message.guild.id];
+
+        if (!message.guild.voiceConnection) message.member.voiceChannel.join().then(function (connection){
+                server.dispatcher = connection.playStream(YTDL(args[1], {filter: "audioonly"}));
+                message.channel.send("Muzsika: " + args[1]);
+
+            //play(connection, message);
+        });
+    }
+    if (msg.startsWith(PREFIX + 'stop')){
+        var server = servers[message.guild.id]; 
+        if (message.guild.voiceConnection)
+        {
+            for (var i = server.queue.length - 1; i >= 0; i--) 
+            {
+                server.queue.splice(i, 1);
+         }
+            //server.dispatcher.end();
+            console.log("[" + new Date().toLocaleString() + "] Stopped the queue.");
+            message.guild.voiceConnection.disconnect();
+            message.channel.send("Sikeresen leállítottad a zenét!");
+        }
 
     }
     if (msg.startsWith(PREFIX + 'készítőd')){
