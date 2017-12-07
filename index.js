@@ -9,7 +9,7 @@ var servers = {};
 function play(connection, message) {
     var server = servers[message.guild.id];
     server.dispatcher = connection.playStream(YTDL(server.queue[0], {filter: "audioonly"}));
-    server.queue.shitf();
+    server.queue.shift();
     server.dispatcher.on("end", function(){
         if (server.queue[0]) play(connection, message);
         else connection.disconnect();
@@ -80,18 +80,19 @@ client.on("message", message => {
         };
 
         var server = servers[message.guild.id];
+        server.queue.push(args1[1]);
 
         if (!message.guild.voiceConnection) message.member.voiceChannel.join().then(function (connection){
-                server.dispatcher = connection.playStream(YTDL(args1[1], {filter: "audioonly"}));
-                message.channel.send("Muzsika: " + args1[1]);
+                //server.dispatcher = connection.playStream(YTDL(args1[1], {filter: "audioonly"}));
+                //message.channel.send("Muzsika: " + args1[1]);
 
-            //play(connection, message);
+            play(connection, message);
         });
     }
-    /*if (msg.startsWith(PREFIX + 'skip')){
+    if (msg.startsWith(PREFIX + 'skip')){
         var server = servers[message.guild.id];
         if (server.dispatcher) server.dispatcher.end();
-    }*/
+    }
     if (msg.startsWith(PREFIX + 'stop')){
         var server = servers[message.guild.id];
         if (!message.member.roles.find("name", "Bot-Access")) {
@@ -104,7 +105,7 @@ client.on("message", message => {
             {
                 server.queue.splice(i, 1);
          }
-            //server.dispatcher.end();
+            server.dispatcher.end();
             console.log("[" + new Date().toLocaleString() + "] Stopped the queue.");
             message.guild.voiceConnection.disconnect();
             message.channel.send("Sikeresen leállítottad a zenét!");
