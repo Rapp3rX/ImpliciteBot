@@ -33,7 +33,7 @@ client.on("message", message => {
     let sender = message.author;
     let cont = message.content.slice(PREFIX.length).split(" ");
     let args = cont.slice(1);
-    var args1 = message.content.substring(PREFIX.length).split(" ");
+    let args1 = message.content.substring(PREFIX.length).split(" ");
 
     if (message.author.equals(client.user)) return;
     
@@ -78,7 +78,7 @@ client.on("message", message => {
         var server = servers[message.guild.id];
 
         if (!message.guild.voiceConnection) message.member.voiceChannel.join().then(function (connection){
-                server.dispatcher = connection.playStream(YTDL(args[1], {filter: "audioonly"}));
+                server.dispatcher = connection.playStream(YTDL(args1[1], {filter: "audioonly"}));
                 message.channel.send("Muzsika: " + args1[1]);
 
             //play(connection, message);
