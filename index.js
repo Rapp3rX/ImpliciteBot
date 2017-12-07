@@ -64,6 +64,10 @@ client.on("message", message => {
 
     }
     if (msg.startsWith(PREFIX + 'play')) {
+        if (!message.member.roles.find("name", "Bot-Access")) {
+            message.channel.send(`${sender}, ehhez \Bot-Access\ role kell!`);
+            return;
+        }
         if (!args1[0]){
             message.channel.send(`${sender}, kérlek adj meg egy linket!`);
             return;
@@ -89,7 +93,11 @@ client.on("message", message => {
         if (server.dispatcher) server.dispatcher.end();
     }*/
     if (msg.startsWith(PREFIX + 'stop')){
-        var server = servers[message.guild.id]; 
+        var server = servers[message.guild.id];
+        if (!message.member.roles.find("name", "Bot-Access")) {
+            message.channel.send(`${sender}, ehhez \Bot-Access\ role kell!`);
+            return;
+        } 
         if (message.guild.voiceConnection)
         {
             for (var i = server.queue.length - 1; i >= 0; i--) 
