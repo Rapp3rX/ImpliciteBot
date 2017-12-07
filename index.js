@@ -109,7 +109,9 @@ client.on("message", message => {
     if (msg.startsWith(PREFIX + 'szerver')){
         message.channel.send("Hamarosan...");
     }
-    if (msg.startsWith(PREFIX + 'info'))
+    if (msg.startsWith(PREFIX + 'info')){
+        message.channel.send("Hamarosan...");
+    }
     if (msg.startsWith(PREFIX + 'parancsok')){
         message.channel.send("Üdvözöllek!\nPrefix: "+ PREFIX + "\nElérhető parancsok tőlem:\n- készítőd(Ki készített)\n- szerver(A szerverről)\n- parancsok(Parancs lista)");
     }
