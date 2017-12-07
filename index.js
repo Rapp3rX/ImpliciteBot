@@ -3,6 +3,10 @@ const YTDL = require("ytdl-core");
 
 const PREFIX = "imp ";
 
+var request = require('request');
+var mcIP = 'implicite.us'; // Your MC server IP
+var mcPort = 25565; // Your MC server port
+
 var client = new Discord.Client();
 var servers = {};
 
@@ -116,7 +120,24 @@ client.on("message", message => {
         message.channel.send("Engem Rapp3rX készített!");
     }
     if (msg.startsWith(PREFIX + 'szerver')){
-        message.channel.send("Hamarosan...");
+        var url = 'http://mcapi.us/server/status?ip=' + mcIP + '&port=' + mcPort;
+        request(url, function(err, response, body) {
+            if(err) {
+                console.log(err);
+                return message.reply('Hiba lépett fel...');
+            }
+            body = JSON.parse(body);
+            var status = '*A szerver jelenleg nem elérhető!*';
+            if(body.online) {
+                status = '**Minecraft** szerver **elérhető**  -  ';
+                if(body.players.now) {
+                    status += '**' + body.players.now + '** játékos van fent!';
+                } else {
+                    status += '*Senki sincs fent!*';
+                }
+            }
+            message.reply(status);
+        });
     }
     if (msg.startsWith(PREFIX + 'info')){
         message.channel.send("Hamarosan...");
