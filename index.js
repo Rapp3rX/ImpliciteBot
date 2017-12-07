@@ -33,7 +33,7 @@ client.on("message", message => {
     let sender = message.author;
     let cont = message.content.slice(PREFIX.length).split(" ");
     let args = cont.slice(1);
-    //var args1 = message.content.substring(PREFIX.length).split(" ");
+    var args1 = message.content.substring(PREFIX.length).split(" ");
 
     if (message.author.equals(client.user)) return;
     
@@ -64,7 +64,7 @@ client.on("message", message => {
 
     }
     if (msg.startsWith(PREFIX + 'play')) {
-        if (!cont[0]){
+        if (!args1[0]){
             message.channel.send(`${sender}, kérlek adj meg egy linket!`);
             return;
         }
@@ -79,7 +79,7 @@ client.on("message", message => {
 
         if (!message.guild.voiceConnection) message.member.voiceChannel.join().then(function (connection){
                 server.dispatcher = connection.playStream(YTDL(args[1], {filter: "audioonly"}));
-                message.channel.send("Muzsika: " + cont[1]);
+                message.channel.send("Muzsika: " + args1[1]);
 
             //play(connection, message);
         });
