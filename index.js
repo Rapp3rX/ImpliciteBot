@@ -4,8 +4,8 @@ const YTDL = require("ytdl-core");
 const PREFIX = "imp ";
 
 var request = require('request');
-var mcIP = 'implicite.us'; // Your MC server IP
-var mcPort = 25565; // Your MC server port
+var mcIP = 'implicite.us';
+var mcPort = 25565;
 
 var client = new Discord.Client();
 var servers = {};
@@ -159,14 +159,11 @@ client.on("message", message => {
         }
 
     }*/
-    else if (msg.includes('csá') || msg.includes('szia') || msg.includes('cső') || msg.includes('szevasz')){
-        message.channel.send(`Szia, ${sender}!`);      
-    }
     else if (msg.includes('tgf') || msg.includes('tagfelvétel')){
         message.channel.send(`${sender}, jelenleg nincs tagfelvétel! Ha lesz, azt kihírdetjük a Facebook oldalunkon, vagy a szerveren!`);      
     }
     else if (msg.includes('implicitebot')){
-        message.channel.send(`Igen, én vagyok! Esetleg szeretnél tőlem valamit ${sender}? Mert akkor: pls parancsok`);      
+        message.channel.send(`Igen, én vagyok! Esetleg szeretnél tőlem valamit ${sender}? Mert akkor: imp parancsok`);      
     }
 
 
