@@ -4,7 +4,7 @@ const YTDL = require("ytdl-core");
 const PREFIX = "imp ";
 
 var request = require('request');
-var mcIP = 'implicite.us';
+var mcIP = 'play.implicite.us';
 var mcPort = 25565;
 
 var client = new Discord.Client();
