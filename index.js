@@ -24,12 +24,12 @@ client.on("message", message => {
     
     if (message.channel.id === '481138002064834589'){
         message.delete();
-        if(!msg.startWith('-new'){
+        if(!msg.startWith('-new')){
            sender.send("Kérlek ne írj feleslegesen a Report szobába, ha kell segítség, használd a -new <probléma> parancsot abba a szobába!");
            }
       }
     if (message.channel.id === '551839600818126880'){
-        if(!msg.startWith('!key'){
+        if(!msg.startWith('!key')){
            message.delete();
            sender.send("Kérlek ne beszélgess feleslegesen ebbe a szobába!");
            }
