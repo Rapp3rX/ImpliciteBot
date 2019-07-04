@@ -22,13 +22,13 @@ client.on("message", message => {
     if (message.author.equals(client.user)) return;
     /*if (message.guild === null) return;*/
     
-    if (message.channel.id === '481138002064834589'){
+    if (message.channel.id === '456140264587657226'){
         message.delete();
         if(!msg.startsWith('-new')){
            sender.send("Kérlek ne írj feleslegesen a Report szobába, ha kell segítség, használd a -new <probléma> parancsot abba a szobába!");
            }
       }
-    if (message.channel.id === '551839600818126880'){
+    if (message.channel.id === '577098686472126464'){
         if(!msg.startsWith('!key')){
            message.delete();
            sender.send("Kérlek ne beszélgess feleslegesen ebbe a szobába!");
