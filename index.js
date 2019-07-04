@@ -62,8 +62,10 @@ client.on("message", message => {
         }
 
     }*/
-    if (msg.startsWith('-new') && msg.channel.id === '481138002064834589') {
-         message.delete();
+    if (msg.startsWith("-new")) {
+      if (msg.channel.id === '481138002064834589'){
+        message.delete();
+      } 
     }
 
 
