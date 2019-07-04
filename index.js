@@ -22,7 +22,7 @@ client.on("message", message => {
     if (message.author.equals(client.user)) return;
     /*if (message.guild === null) return;*/
     if (!message.member.roles.find('id', '336252194057879552')) {
-    if (message.channel.id === '456140264587657226'){
+    if (message.channel.id === '596418935197532170'){
         message.delete();
         if(!msg.startsWith('-new')){
            sender.send("Kérlek ne írj feleslegesen a Report szobába, ha kell segítség, használd a -new <probléma> parancsot abba a szobába!");
