@@ -21,9 +21,11 @@ client.on("message", message => {
 
     if (message.author.equals(client.user)) return;
     /*if (message.guild === null) return;*/
-    
+    if (!message.member.roles.find('id', '336252194057879552')) {
     if (message.channel.id === '456140264587657226'){
         message.delete();
+      
+                return message.channel.send(`${sender}, ehhez \DiscordAdmin\ role kell!`);
         if(!msg.startsWith('-new')){
            sender.send("Kérlek ne írj feleslegesen a Report szobába, ha kell segítség, használd a -new <probléma> parancsot abba a szobába!");
            }
@@ -34,6 +36,7 @@ client.on("message", message => {
            sender.send("Kérlek ne beszélgess feleslegesen ebbe a szobába!");
            }
       }
+    }
 
 
 });
