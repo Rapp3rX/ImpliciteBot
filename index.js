@@ -24,8 +24,6 @@ client.on("message", message => {
     if (!message.member.roles.find('id', '336252194057879552')) {
     if (message.channel.id === '456140264587657226'){
         message.delete();
-      
-                return message.channel.send(`${sender}, ehhez \DiscordAdmin\ role kell!`);
         if(!msg.startsWith('-new')){
            sender.send("Kérlek ne írj feleslegesen a Report szobába, ha kell segítség, használd a -new <probléma> parancsot abba a szobába!");
            }
